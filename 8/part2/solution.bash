@@ -14,8 +14,7 @@ for (( fix = 0; fix < ${#code[@]}; fix++ )) do
 
     acc=0 ip=0
     executed=()
-    until (( executed[ip] || ip == ${#code[@]} )); do
-        executed[ip]=1
+    until (( executed[ip]++ || ip == ${#code[@]} )); do
         ins=(${code[ip]})
         case $ins in
             jmp) (( ip += ins[1] )) ;;

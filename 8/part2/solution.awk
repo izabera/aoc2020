@@ -15,8 +15,7 @@ END {
         acc=0
         ip=0
         delete executed
-        while (! (executed[ip] || ip >= length(code))) {
-            executed[ip] = 1
+        while (! (executed[ip]++ || ip >= length(code))) {
             switch (code[ip]) {
                 case /jmp/: ip += arg[ip]; break
                 case /acc/: acc += arg[ip]
