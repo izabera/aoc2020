@@ -12,10 +12,10 @@ END {
         else
             continue
 
-        acc=0
-        ip=0
-        delete executed
-        while (! (executed[ip]++ || ip >= length(code))) {
+        acc = 0
+        ip = 0
+        while (!(ip >= length(code) || ip < 0 || executed[ip] == fix)) {
+            executed[ip] = fix
             switch (code[ip]) {
                 case /jmp/: ip += arg[ip]; break
                 case /acc/: acc += arg[ip]
@@ -24,7 +24,7 @@ END {
         }
 
         code[fix] = swap[code[fix]]
-        if (ip >= length(code)) {
+        if (ip == length(code)) {
             print acc
             break
         }
