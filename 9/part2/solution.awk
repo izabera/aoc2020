@@ -13,36 +13,28 @@ NR <= nelems { next }
     exit
 }
 
-function sum(i, j) {
-    res = 0
-    for (q = 0; q <= j; q++)
-        res += a[i+q]
-    return res
-}
-
 END {
     i = 1
-    j = 1
-    while (1) {
-        res = sum(i, j)
-        if (res == target) {
-            low = hi = a[i]
-            for (q = 0; q <= j; q++) {
-                if (low > a[i+q])
-                    low = a[i+q]
-                if (hi < a[i+q])
-                    hi = a[i+q]
-            }
-            print low + hi
-            break
-        }
-        if (res > target)
+    j = 2
+    sum = a[i] + a[j]
+    while (sum != target || i == j) {
+        if (sum > target)
         {
+            sum -= a[i]
             i++
-            j = 1
         }
-        else {
+        else
+        {
             j++
+            sum += a[j]
         }
     }
+    low = hi = a[i]
+    for (q = i; q <= j; q++) {
+        if (low > a[q])
+            low = a[q]
+        if (hi < a[q])
+            hi = a[q]
+    }
+    print low + hi
 }
