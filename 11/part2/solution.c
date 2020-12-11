@@ -14,8 +14,9 @@ int main() {
     int w = strcspn(file, "\n");
     int h = size / (w + 1);
 
-    char (*   grid)[w] = malloc(w * h),
-         (*tmpgrid)[w] = malloc(w * h);
+    char *ptr = malloc(2 * w * h);
+    char (*   grid)[w] = (void *)ptr,
+         (*tmpgrid)[w] = (void *)(ptr + w * h);
 
     for (int i = 0; i < h; i++)
         for (int j = 0; j < w; j++)
